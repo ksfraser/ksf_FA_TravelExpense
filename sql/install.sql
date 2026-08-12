@@ -1,6 +1,6 @@
 -- Travel Expense module database schema for FrontAccounting
 
-CREATE TABLE IF NOT EXISTS `fa_travel_requests` (
+CREATE TABLE IF NOT EXISTS `0_travel_requests` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `employee_id` INT(11) NOT NULL,
     `project_id` VARCHAR(20) DEFAULT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `fa_travel_requests` (
     KEY `dates` (`start_date`, `end_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `fa_travel_expenses` (
+CREATE TABLE IF NOT EXISTS `0_travel_expenses` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `travel_id` INT(11) NOT NULL,
     `expense_type` ENUM(
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `fa_travel_expenses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Per diem rules by location
-CREATE TABLE IF NOT EXISTS `fa_travel_per_diem` (
+CREATE TABLE IF NOT EXISTS `0_travel_per_diem` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `city` VARCHAR(100) NOT NULL,
     `country` VARCHAR(50) NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `fa_travel_per_diem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Activity codes for project billing
-CREATE TABLE IF NOT EXISTS `fa_travel_activity_codes` (
+CREATE TABLE IF NOT EXISTS `0_travel_activity_codes` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `code` VARCHAR(30) NOT NULL,
     `description` VARCHAR(255) NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `fa_travel_activity_codes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Suppliers/vendors for travel
-CREATE TABLE IF NOT EXISTS `fa_travel_suppliers` (
+CREATE TABLE IF NOT EXISTS `0_travel_suppliers` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NOT NULL,
     `service_type` ENUM('Hotel','Car_Rental','Taxi','Restaurant','Transit','Other') NOT NULL,
@@ -107,4 +107,3 @@ CREATE TABLE IF NOT EXISTS `fa_travel_suppliers` (
     KEY `preference_order` (`preference_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `fa_modules` (`name`, `version`, `enabled`, `installed`) VALUES ('TravelExpense', '1.1.0', 1, NOW()) ON DUPLICATE KEY UPDATE `version` = '1.1.0';
