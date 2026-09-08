@@ -42,14 +42,8 @@ class hooks_ksf_FA_TravelExpense extends hooks {
      * @return application|null New tab application instance or nothing
      */
     function install_tabs($app) {
-        set_ext_domain('modules/ksf_FA_TravelExpense');
-        if (class_exists('application')) {
-            $tab = new application('expense_app', 'Expense Tracking');
-            $tab->set_title('Expense Tracking');
-            $tab->set_icon('money');
-            return $tab;
-        }
-        return null;
+        // Override in modules that add apps
+        // return new ksf_FA_TravelExpense_app();
     }
 
     /**
