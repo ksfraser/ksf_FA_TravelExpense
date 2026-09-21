@@ -20,12 +20,15 @@ CREATE TABLE IF NOT EXISTS `0_travel_requests` (
     `rejection_reason` TEXT DEFAULT NULL,
     `created_by` INT(11) DEFAULT NULL,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `event_id` VARCHAR(20) DEFAULT NULL,
+    `event_attendee_email` VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (`id`),
     KEY `employee_id` (`employee_id`),
     KEY `project_id` (`project_id`),
     KEY `task_id` (`task_id`),
     KEY `status` (`status`),
-    KEY `dates` (`start_date`, `end_date`)
+    KEY `dates` (`start_date`, `end_date`),
+    UNIQUE KEY `uk_event_attendee` (`event_id`, `event_attendee_email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `0_travel_expenses` (
@@ -51,13 +54,16 @@ CREATE TABLE IF NOT EXISTS `0_travel_expenses` (
     `mileage_miles` DECIMAL(10,2) DEFAULT NULL,
     `mileage_rate` DECIMAL(5,4) DEFAULT NULL,
     `status` ENUM('Pending','Approved','Rejected','Reimbursed') NOT NULL DEFAULT 'Pending',
+    `event_id` VARCHAR(20) DEFAULT NULL,
+    `event_attendee_email` VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (`id`),
     KEY `travel_id` (`travel_id`),
     KEY `project_id` (`project_id`),
     KEY `task_id` (`task_id`),
     KEY `activity_code` (`activity_code`),
     KEY `expense_type` (`expense_type`),
-    KEY `status` (`status`)
+    KEY `status` (`status`),
+    KEY `event` (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Per diem rules by location
