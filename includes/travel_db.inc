@@ -17,7 +17,7 @@ function get_travel_requests(array $filters = []): ?object
     global $db;
     $sql = "SELECT t.*, e.name as employee_name, p.name as project_name 
         FROM " . TB_PREF . "travel_requests t
-        LEFT JOIN " . TB_PREF . "hr_employees e ON t.employee_id = e.id
+        LEFT JOIN " . TB_PREF . "ksf_travelexpense_employees e ON t.employee_id = e.id
         LEFT JOIN " . TB_PREF . "projects p ON t.project_id = p.project_id WHERE 1=1";
     
     if (!empty($filters['employee_id'])) $sql .= " AND t.employee_id = " . $filters['employee_id'];
@@ -35,7 +35,7 @@ function get_travel_request(int $id): ?array
     global $db;
     $sql = "SELECT t.*, e.name as employee_name, p.name as project_name 
         FROM " . TB_PREF . "travel_requests t
-        LEFT JOIN " . TB_PREF . "hr_employees e ON t.employee_id = e.id
+        LEFT JOIN " . TB_PREF . "ksf_travelexpense_employees e ON t.employee_id = e.id
         LEFT JOIN " . TB_PREF . "projects p ON t.project_id = p.project_id
         WHERE t.id = " . $id;
     $result = $db->query($sql);
